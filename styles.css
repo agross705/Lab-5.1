@@ -1,0 +1,52 @@
+body {
+  background-color: gold;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  line-height: 1.6;
+}
+
+/* Main container styling */
+main {
+  background-color: silver;
+  height: 100vh;
+}
+
+/* Product input section layout */
+#product-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Cart list */
+#cart {
+  list-style: none;
+  padding: 0;
+}
+
+/* Individual cart item styling */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Spacing for txt inside cart item */
+.cart-item span {
+  flex: 1;
+}
+
+/* Remove btn spacing */
+.cart-item button {
+  margin-left: 10px;
+}
+
+/* Footer styling */
+footer {
+  background-color: cyan;
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  /* position: fixed; */
+}
