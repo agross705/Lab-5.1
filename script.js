@@ -27,3 +27,44 @@ function removeItem(event) {
   // Removes item from DOM
   item.remove();
 }
+
+// Runs when "Add Product" btn is clicked
+addProductButton.addEventListener('click', () => {
+  const name = productNameInput.value.trim();
+  const price = parseFloat(productPriceInput.value);
+
+  // Basic validation
+  if (name === '' || isNaN(price) || price <= 0) {
+    alert('Please enter a valid product name and price.');
+    return;
+  }
+
+  // Create a new list item for the cart
+  const listItem = document.createElement('li');
+  listItem.classList.add('cart-item');
+
+  // Store price directly on the element for later use
+  listItem.dataset.price = price;
+
+  // Product name span
+  const nameSpan = document.createElement('span');
+  nameSpan.textContent = name;
+
+  // Product price span
+  const priceSpan = document.createElement('span');
+  priceSpan.textContent = `$${price.toFixed(2)}`;
+
+  // Append elements to list item
+  listItem.appendChild(nameSpan);
+  listItem.appendChild(priceSpan);
+
+  // Add item to the cart
+  cart.appendChild(listItem);
+
+  // Update total price
+  updateTotalPrice(price);
+
+  // Clear input fields
+  productNameInput.value = '';
+  productPriceInput.value = '';
+});
