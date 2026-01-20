@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="styles.css" rel="stylesheet" />
+
+    <title>Lab 5.1 | Dynamic Content Creation</title>
+
+  </head>
+
+  <body>
+    <main>
+      <h1>Dynamic Shopping Cart</h1>
+
+      <!-- Product Input Section -->
+      <div id="product-container">
+
+        <!-- Product Name -->
+        <input type="text" id="product-name" placeholder="Product Name" />
+
+        <!-- Product Price -->
+        <input type="number" id="product-price" placeholder="Product Price" />
+
+        <!-- Add Product Button -->
+        <button id="add-product">Add Product</button>
+      </div>
+
+      <!-- Cart List -->
+      <ul id="cart"></ul>
+
+      <!-- Cart Total Price -->
+      <h3>Total: $<span id="total-price">0</span></h3>
+    </main>
+
+    <footer>
+      &copy; 2026 Coded by
+      <a href="https://github.com/agross705">agross705</a>.
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
