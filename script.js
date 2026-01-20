@@ -19,13 +19,40 @@ function removeItem(event) {
   const item = event.target.closest("li");
 
   // Retrieves price stored in data attribute
-  const price = parseFloat(item.dataset.price);
+  const itemTotal = parseFloat(item.dataset.price);
 
   // Subtracts price from total
-  updateTotalPrice(-price);
+  updateTotalPrice(-itemTotal);
 
   // Removes item from DOM
   item.remove();
+}
+
+// Updates quantity and price for a specific cart item
+function updateQuantity(item, change) {
+  let quantity = parseInt(item.dataset.quantity);
+  const price = parseFloat(item.dataset.price);
+
+  // Prevent quantity from going below 1
+  if (quantity + change < 1) return;
+
+  // Update quantity
+  quantity += change;
+  item.dataset.quantity = quantity;
+
+  // Calculate new item total
+  const newItemTotal = quantity * price;
+
+  // Update overall total price
+  const previousItemTotal = parseFloat(item.dataset.itemTotal);
+  updateTotalPrice(newItemTotal - previousItemTotal);
+
+  // Store new item total
+  item.dataset.itemTotal = newItemTotal;
+
+  // Update DOM text
+  item.querySelector('.quantity').textContent = quantity;
+  item.querySelector('.item-total').textContent = `$${newItemTotal.toFixed(2)}`;
 }
 
 // Runs when "Add Product" btn is clicked
@@ -45,22 +72,42 @@ addProductButton.addEventListener("click", () => {
 
   // Store price directly on the element for later use
   listItem.dataset.price = price;
+  listItem.dataset.quantity = 1;
+  listItem.dataset.itemTotal = price;
 
   // Product name span
   const nameSpan = document.createElement("span");
   nameSpan.textContent = name;
 
+  // Quantity controls
+  const decreaseBtn = document.createElement('button');
+  decreaseBtn.textContent = '-';
+
+  const quantitySpan = document.createElement('span');
+  quantitySpan.classList.add('quantity');
+  quantitySpan.textContent = '1';
+
+  const increaseBtn = document.createElement('button');
+  increaseBtn.textContent = '+';
+
   // Product price span
   const priceSpan = document.createElement("span");
+  priceSpan.classList.add('item-total');
   priceSpan.textContent = `$${price.toFixed(2)}`;
 
   // Remove button
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "Remove";
+
+  increaseBtn.addEventListener('click', () => updateQuantity(listItem, 1));
+  decreaseBtn.addEventListener('click', () => updateQuantity(listItem, -1));
   removeBtn.addEventListener("click", removeItem);
 
   // Append elements to list item
   listItem.appendChild(nameSpan);
+  listItem.appendChild(decreaseBtn);
+  listItem.appendChild(quantitySpan);
+  listItem.appendChild(increaseBtn);
   listItem.appendChild(priceSpan);
   listItem.appendChild(removeBtn);
 
